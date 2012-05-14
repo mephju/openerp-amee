@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.delete.line",1337009816385
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.delete.line",1337009816576
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1337009820513
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.saveAll",1337009822713
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337010049290
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337010108836
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337010127196
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337010148663
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337010153657
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337010306168
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337010312957
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337010543021
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337010543728
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337011285211
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337011285293
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337011290703
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337011290718
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337011295982
+activated,editor,com.android.ide.eclipse.adt,18.0.0.v201203301601-306762,"com.android.ide.eclipse.editors.CommonXmlEditor",1337011296939
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337011298648
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337011299753
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337011299768
+error,log,,,"java.io.IOException: No such file or directory",1337011301834
+activated,editor,org.python.pydev,2.5.0.2012040618,"org.python.pydev.editor.PythonEditor",1337011301835
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1337011301848

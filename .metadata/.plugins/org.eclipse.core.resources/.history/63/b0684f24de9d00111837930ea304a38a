@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="test">
+            <field name="test">test.t</field>
+            <field name="model">test.test</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Fuckinng test">
+                    <field name="name" string="test name"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</openerp>

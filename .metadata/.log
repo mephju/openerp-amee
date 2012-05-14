@@ -1,0 +1,69 @@
+
+!ENTRY org.python.pydev.core 4 4 2012-05-14 18:01:41.834
+!MESSAGE java.io.IOException: No such file or directory
+!STACK 0
+java.lang.RuntimeException: java.io.IOException: No such file or directory
+	at org.python.pydev.core.DeltaSaver.addCommand(DeltaSaver.java:252)
+	at org.python.pydev.core.DeltaSaver.addDeleteCommand(DeltaSaver.java:295)
+	at com.python.pydev.analysis.additionalinfo.AbstractAdditionalInfoWithBuild.removeInfoFromModule(AbstractAdditionalInfoWithBuild.java:80)
+	at com.python.pydev.analysis.builder.AnalysisBuilderRunnableForRemove.removeInfoForModule(AnalysisBuilderRunnableForRemove.java:68)
+	at com.python.pydev.analysis.builder.AnalysisBuilderRunnable.doAnalysis(AnalysisBuilderRunnable.java:178)
+	at com.python.pydev.analysis.builder.AbstractAnalysisBuilderRunnable.run(AbstractAnalysisBuilderRunnable.java:156)
+	at org.python.pydev.core.concurrency.RunnableAsJobsPoolThread$1.run(RunnableAsJobsPoolThread.java:103)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.IOException: No such file or directory
+	at java.io.UnixFileSystem.createFileExclusively(Native Method)
+	at java.io.File.createNewFile(File.java:883)
+	at org.python.pydev.core.DeltaSaver.addCommand(DeltaSaver.java:250)
+	... 7 more
+
+!ENTRY org.python.pydev.core 4 4 2012-05-14 18:01:41.964
+!MESSAGE java.lang.reflect.InvocationTargetException
+!STACK 0
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at org.python.pydev.core.REF.invoke(REF.java:499)
+	at org.python.pydev.core.REF.invoke(REF.java:488)
+	at org.python.pydev.builder.PydevGrouperVisitor.visitWith(PydevGrouperVisitor.java:81)
+	at org.python.pydev.builder.PydevGrouperVisitor.visitChangedResource(PydevGrouperVisitor.java:116)
+	at org.python.pydev.builder.PydevInternalResourceDeltaVisitor.chooseVisit(PydevInternalResourceDeltaVisitor.java:168)
+	at org.python.pydev.builder.PydevInternalResourceDeltaVisitor.visit(PydevInternalResourceDeltaVisitor.java:114)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:69)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:80)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:49)
+	at org.python.pydev.builder.PyDevBuilder.build(PyDevBuilder.java:117)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.python.pydev.core.REF.invoke(REF.java:497)
+	... 21 more
+Caused by: java.lang.RuntimeException: java.io.IOException: No such file or directory
+	at org.python.pydev.core.DeltaSaver.addCommand(DeltaSaver.java:252)
+	at org.python.pydev.core.DeltaSaver.addInsertCommand(DeltaSaver.java:291)
+	at org.python.pydev.editor.codecompletion.revisited.ModulesManagerWithBuild.doAddSingleModule(ModulesManagerWithBuild.java:114)
+	at org.python.pydev.editor.codecompletion.revisited.ModulesManager.addModule(ModulesManager.java:624)
+	at org.python.pydev.editor.codecompletion.revisited.ModulesManagerWithBuild.rebuildModule(ModulesManagerWithBuild.java:210)
+	at org.python.pydev.editor.codecompletion.revisited.ASTManager.rebuildModule(ASTManager.java:86)
+	at org.python.pydev.editor.codecompletion.revisited.PyCodeCompletionVisitor.visitChangedResource(PyCodeCompletionVisitor.java:63)
+	... 26 more
+Caused by: java.io.IOException: No such file or directory
+	at java.io.UnixFileSystem.createFileExclusively(Native Method)
+	at java.io.File.createNewFile(File.java:883)
+	at org.python.pydev.core.DeltaSaver.addCommand(DeltaSaver.java:250)
+	... 32 more
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2012-05-14 18:02:01.543
+!MESSAGE No projects found for [/home/mephju/dev/projects/openerp/openerp-6.1-1/openerp/addons/test/test/view.xml]
