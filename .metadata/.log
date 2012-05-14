@@ -67,3 +67,6 @@ Caused by: java.io.IOException: No such file or directory
 
 !ENTRY com.android.ide.eclipse.adt 2 0 2012-05-14 18:02:01.543
 !MESSAGE No projects found for [/home/mephju/dev/projects/openerp/openerp-6.1-1/openerp/addons/test/test/view.xml]
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2012-05-14 18:03:55.401
+!MESSAGE No projects found for [/home/mephju/dev/projects/openerp/openerp-6.1-1/openerp/addons/test/test/view.xml]
