@@ -1,6 +1,6 @@
 {
         "name" : "amee",
-        "images" : [],
+        "images" : ["images/amee.png"],
         "version" : "0.1",
         "author" : "Kolja Kirchner",
         "website" : "http://androidshopify.wordpress.com",

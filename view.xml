@@ -1,17 +1,66 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
-        
-        <record model="ir.ui.view" id="test">
-            <field name="test">test.t</field>
-            <field name="model">test.test</field>
-            <field name="type">search</field>
-            <field name="arch" type="xml">
-                <search string="Fuckinng test">
-                    
-                    <field name="name" string="test name"/>
-                </search>
-            </field>
-        </record>
-    </data>
+	<data>
+	    
+	    <record model="ir.actions.act_window" id="action_amee_form">
+			<field name="name">LWC-EPI</field>
+			<field name="res_model">amee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+		</record>
+		
+		<menuitem name="LWC-EPI" icon="STOCK_OPEN" id="amee_menu"   web_icon="images/amee.png" web_icon_hover="images/amee-hover.png" action="action_amee_form"/>
+		
+
+		
+		
+			<!--  
+			
+			
+		<menuitem name="Configuration" parent="amee_menu" id="amee_menu_mainform" action="action_amee_form" sequence="1"/>
+		
+
+		
+		
+		
+		
+		
+	
+		<record model="ir.ui.view" id="amee_tree_view">
+			<field name="name">amee.tree</field>
+			<field name="model">amee</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="amee">
+					<field name="title" />
+					<field name="note" />
+					<field name="note_date" />
+				</tree>
+			</field>
+		</record>
+		-->
+
+
+
+		<record model="ir.ui.view" id="amee_form_view">
+			<field name="name">amee.form</field>
+			<field name="model">amee</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="amee">
+					<field name="api_key" />
+				</form>
+			</field>
+		</record>
+		
+		
+		
+
+
+
+
+
+
+	</data>
+
 </openerp>
