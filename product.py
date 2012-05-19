@@ -6,6 +6,10 @@ from lxml import etree
 class product(osv.osv):
     _inherit = "product.product"
     
+    _columns = { 
+                   'epi': fields.char('EPI', size=50)
+                   }
+    
     replace_text = '<separator string="AMEE"/>'
 
 
@@ -28,7 +32,10 @@ class product(osv.osv):
         for key in values.keys():
             print key
             value = values[key]
+            
             view_code += """<label string="%s"/> <label string="%s"/> """ %(key, value)
+            view_code += """<field name="name" readonly="1" widget="url">adsfdasf</field>"""
+            
             print view_code
             
         view_code += '''</group>'''

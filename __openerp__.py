@@ -3,7 +3,7 @@
         "images" : [],
         "version" : "0.1",
         "author" : "Kolja Kirchner",
-        "website" : "http://androidshopify.wordpress.com",
+        "website" : "",
         "category" : "Products",
         "description": """  """,
         "depends" : ['base', 'product'],
