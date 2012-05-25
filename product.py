@@ -4,15 +4,29 @@ from lxml import etree
 
 
 class product(osv.osv):
+   
+    def epi(self, cr, uid, ids, fields, arg, context=None):
+        print "calc epi"
+        x={}
+        for record in self.browse(cr, uid, ids):
+            print "calc epi 5"
+            x[record.id] = 5
+        return x
+   
+   
+    
     _inherit = "product.product"
     
     _columns = { 
-                   'epi': fields.char('EPI', size=50)
+                    'epi' : fields.function(epi, method = True, type = 'integer', string='EPIII'),
+                   'test':fields.char('UPS User Password', size=100),
+                   "url": fields.char('AMEE Webservice URL', size=100)
                    }
+   
     
     replace_text = '<separator string="AMEE"/>'
 
-
+    
     def fetch_amee_data(self):
         result = {
                   'a': 10,
@@ -34,7 +48,6 @@ class product(osv.osv):
             value = values[key]
             
             view_code += """<label string="%s"/> <label string="%s"/> """ %(key, value)
-            view_code += """<field name="name" readonly="1" widget="url">adsfdasf</field>"""
             
             print view_code
             
