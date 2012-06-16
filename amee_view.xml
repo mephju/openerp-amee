@@ -11,7 +11,8 @@
 		</record>
 		
 		<menuitem name="LWC-EPI" icon="STOCK_OPEN" id="amee_menu"   web_icon="images/amee.png" web_icon_hover="images/amee-hover.png" action="action_amee_form"/>
-
+		
+		
 		<record model="ir.ui.view" id="amee_form_view">
 			<field name="name">amee.form</field>
 			<field name="model">amee.config</field>
@@ -40,6 +41,7 @@
 		</record>
 
 
+		
 
 
 	</data>

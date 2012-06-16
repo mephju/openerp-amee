@@ -1,0 +1,1 @@
+import amee_wizard

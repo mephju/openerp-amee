@@ -5,28 +5,13 @@ from dns.rdatatype import NULL
 
 
 class product(osv.osv):
-   
-    def epi(self, cr, uid, ids, fields, arg, context=None):
-        print "calc epi"
-        x={}
-        for record in self.browse(cr, uid, ids):
-            print "calc epi 5"
-            x[record.id] = 5
-        return x
-   
-   
-    
     _inherit = "product.product"
     
-    _columns = { 
-                    'epi' : fields.function(epi, method = True, type = 'integer', string='EPIII'),
-                   'test':fields.char('UPS User Password', size=100),
-                   "url": fields.char('AMEE Webservice URL', size=100)
-                   }
-   
+    _columns = {
+                "url": fields.char('AasdfdasfL', size=100)
+    }
     
     replace_text = '<separator string="AMEE"/>'
-
     
     def fetch_amee_data(self):
         result = {
@@ -59,19 +44,21 @@ class product(osv.osv):
     
     def generate_lwc_epi_view(self, cr, uid):
         print "dynamically generating view for LWC-EPI"
-        values          = self.fetch_amee_data()
-        amee_api_key    = self._fetch_api_key(cr, uid)
+        ameeValues          = self.fetch_amee_data()
+        amee_api_key        = self._fetch_api_key(cr, uid)
         
         view_code = '''<group colspan="3" col="2" string="EPI DATA">'''
         
         if amee_api_key:
             view_code += """<label string="%s"/> <label string="%s"/> """ %("apikey", amee_api_key)
         
-        for key in values.keys():
+       
+        for key in ameeValues.keys():
             print key
-            value = values[key]
+            value = ameeValues[key]
             
             view_code += """<label string="%s"/> <label string="%s"/> """ %(key, value)
+            
             
             print view_code
             
@@ -97,4 +84,15 @@ class product(osv.osv):
         
     
 product()
+
+
+
+
+
+
+
+
+
+
+
 

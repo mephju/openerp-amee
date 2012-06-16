@@ -2,6 +2,14 @@
 <openerp>
 	<data>
         
+	    
+	    <wizard
+			string="Query Amee"
+			model="product.product"
+			name="amee.wizard"
+			id="amee_wizard"/>
+	    		
+	    		
         <record id="product_normal_form_view" model="ir.ui.view">
             <field name="name">product.normal.form.inherit</field>
             <field name="model">product.product</field>
@@ -15,9 +23,8 @@
                 		     
 	                		     
                 		     <separator string="AMEE"/>
-                		     <field name="epi" >
-                		        
-	                		</field>
+           		
+	                		<button name='%(amee_wizard)d' type='action' string='Query Amee' />
                 		 </page>
 				 </xpath>
                
@@ -25,7 +32,8 @@
         </record>
 
         
-        
+ 
+
         
 	</data>
 
