@@ -3,29 +3,82 @@
 	<data>
 	    
 	    
-	    <!-- NEW MAIN MENU ITEM LWC-EPI -->
+	    <!-- NEW MAIN MENU ITEM LWC-EPI
 	    <record model="ir.actions.act_window" id="action_amee_form">
 			<field name="name">LWC-EPI</field>
 			<field name="res_model">amee.config</field>
 			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
 		</record>
 		
 		<menuitem name="LWC-EPI" icon="STOCK_OPEN" id="amee_menu"   web_icon="images/amee.png" web_icon_hover="images/amee-hover.png" action="action_amee_form"/>
+		
+		
+		
+		
+		
+	 -->	
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		<record model="ir.ui.view" id="amee_form_view">
 			<field name="name">amee.form</field>
 			<field name="model">amee.config</field>
 			<field name="type">form</field>
+ 			<field name="inherit_id" ref="base.res_config_view_base"/>
 			<field name="arch" type="xml">
-				<form string="amee">
-					<field name="api_key" />
-					<field name="password" />
-					<field name="url" />
-				</form>
-			</field>
-		</record>
+    			<group string="res_config_contents" position="replace">
+        		<!-- your content should be inserted within this, the string
+             	attribute of the previous group is used to easily find
+             	it for replacement -->
+        			<label colspan="4" align="0.0" string="Configure this item by defining its field"/>
+        		<field colspan="2" name="url"/>
+        		<field colspan="2" name="api_key"/>
+        		<field colspan="2" name="password"/>
+    			</group>
+			</field>				
+			    
+		 </record>
 		
+		<record id="action_amee_config" model="ir.actions.act_window">
+    <field name="name">Configure amee module</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">amee.config</field>
+    <field name="view_type">form</field>
+    <field name="view_id" ref="amee_form_view"/>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+	</record>
+		
+		
+		<record id="my_config_step" model="ir.actions.todo"  >
+    <field name="action_id" ref="action_amee_config"/>
+        <field name="sequence">3</field>
+        <field name="type">automatic</field>
+</record>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!--  
 		
 		<record model="ir.ui.view" id="amee_form_view">
 			<field name="name">amee.tree</field>
@@ -39,7 +92,7 @@
 				</form>
 			</field>
 		</record>
-
+-->
 
 		
 
