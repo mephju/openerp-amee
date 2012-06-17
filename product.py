@@ -57,7 +57,8 @@ class product(osv.osv):
             print key
             value = ameeValues[key]
             
-            view_code += """<label string="%s"/> <label string="%s"/> """ %(key, value)
+            if value: 
+                view_code += """<label string="%s"/> <label string="%s"/> """ %(key, value)
             
             
             print view_code

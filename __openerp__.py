@@ -9,6 +9,6 @@
         "depends" : ['base', 'product'],
         "init_xml" : ['amee_view.xml', 'company_view.xml', 'product_view.xml' ],
         "demo_xml" : [],
-        "update_xml" : ['wizards/amee_wizard.xml'],
+        "update_xml" : [],
         "installable": True
 }
