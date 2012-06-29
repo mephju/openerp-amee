@@ -8,7 +8,12 @@ class product(osv.osv):
     _inherit = "product.product"
     
     _columns = {
-                "url": fields.char('AasdfdasfL', size=100)
+                
+         
+    }
+    
+    _defaults = {
+  
     }
     
     replace_text = '<separator string="AMEE"/>'

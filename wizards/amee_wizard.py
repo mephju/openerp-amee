@@ -1,31 +1,88 @@
 from osv import osv, fields
+import httplib
+import string
+import base64
+import urllib2
 
 class wizard_amee(osv.osv_memory):
     _name = 'amee.wizard'
-    _columns = { 
-            "field0": fields.char('field0', size=100),
-            "field1": fields.char('field1', size=100),
-            "field2": fields.char('field2', size=100),
-            "field3": fields.char('field3', size=100),
-            "field4": fields.char('field4', size=100),
-            "field5": fields.char('field5', size=100),
-            "field6": fields.char('field6', size=100),
-            "field7": fields.char('field7', size=100),
-            "field8": fields.char('field8', size=100),
-            "field9": fields.char('field9', size=100),
-            "field10": fields.char('field10', size=100),
-            "field11": fields.char('field11', size=100),
-            "field12": fields.char('field12', size=100),
-            "field13": fields.char('field13', size=100),
+    _columns = {
+                 
+            "gas_quant": fields.integer('Gas'),
+            "iron_quant": fields.integer('Iron'),
+            "material_quant": fields.integer('Material'),
+            "pig_quant": fields.integer('Pig'),
+            "steel_quant": fields.integer('Steel'),
+            'result_co2e': fields.float('CO2e', readonly=True),
+            'result_ch4': fields.float('CH4', readonly=True),
+            'result_co2': fields.float('CO2', readonly=True),
             'product_id': fields.many2one('product.product', 'Product', required=True, readonly=1),
+    }
+    
+    
+    _defaults = {
+                 'gas_quant': 100,
+                 'iron_quant': 100,
+                 'material_quant': 100,
+                 'pig_quant': 100,
+                 'steel_quant': 100
     }
     
     
     def query_amee(self, cr, uid, ids, context=None):
         amee_config = self._get_amee_config( cr, uid)
-        print "we are querying amee now"
-        print context
-        return {}
+        
+        data = self.read(cr, uid, ids, context=context)[0]
+        
+        server      = 'api-stage.amee.com'
+        endpoint    = "/3.6/categories/iron_and_steel/calculation"
+        query = ""
+        query += "?material=Steel&"
+        query += "values.gasQuantity=" + str(data['gas_quant']) + "&units.gasQuantity=kg&"
+        query += "values.ironQuantity=" + str(data['iron_quant']) + "&units.ironQuantity=kg&"
+        query += "values.materialQuantity=" + str(data['material_quant']) + "&units.materialQuantity=kg&"
+        query += "values.pigQuantity=" + str(data['pig_quant']) + "&units.pigQuantity=kg&"
+        query += "values.steelQuantity=" + str(data['steel_quant']) + "&units.steelQuantity=kg"        
+        
+        
+        
+        user    = "sam1"
+        pwd     = "v57ty37f"
+        auth    = 'Basic ' + string.strip(base64.encodestring(user + ':' + pwd))
+        
+        conn = httplib.HTTPConnection(server)
+        header = {  
+                    "Accept" : "application/json",
+                    "Authorization" : auth
+                  }
+        
+        
+        conn.request("GET", endpoint+query, None, header)
+        response = conn.getresponse()
+        
+        
+        
+        
+#        authinfo = urllib2.HTTPPasswordMgrWithDefaultRealm()
+#        authinfo.add_password(None, server, 'testuser', 'test-user-pass')
+#        page = 'HTTP://'+SERVER+'/cgi-bin/tools/orders_waiting.py'
+#        handler = urllib2.HTTPBasicAuthHandler(authinfo)
+#        myopener = urllib2.build_opener(handler)
+#        opened = urllib2.install_opener(myopener)
+#        output = urllib2.urlopen(page)
+        
+        #response = urllib.urlopen('https://sam1:v57ty37f@api-stage.amee.com/3.6/categories/iron_and_steel/calculation' + query)
+        
+        print 'http call: '
+        print conn
+        print response.status, response.reason
+        
+        
+        print "we are querying amee now for " + str(data['product_id'])
+        print 'query: ' + endpoint + query
+        print "data%%%%%%%%%%%%%%%%%%%%%%%%%%%%%:" 
+        print data
+        return { 'result_co2e':334 }
     
     def get_amee_params(self, product):
         return ["param1", "param2", "param3"]
@@ -50,18 +107,18 @@ class wizard_amee(osv.osv_memory):
                  
         
     
-    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
-        param_fields    = self._build_param_fields(context)
-        print param_fields
-        res             = super(wizard_amee, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar, submenu=submenu)
-      
-        print res['arch']
-        for k in param_fields.keys():
-            print k
-            if k in res['arch']:
-                print "replacing " + k
-                res['arch'] = res['arch'].replace(k, param_fields[k])
-        return res
+#    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
+#        param_fields    = self._build_param_fields(context)
+#        print param_fields
+#        res             = super(wizard_amee, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar, submenu=submenu)
+#      
+#        print res['arch']
+#        for k in param_fields.keys():
+#            print k
+#            if k in res['arch']:
+#                print "replacing " + k
+#                res['arch'] = res['arch'].replace(k, param_fields[k])
+#        return res
     
     def _get_amee_config(self, cr, uid):
         amee    = self.pool.get('amee.config')

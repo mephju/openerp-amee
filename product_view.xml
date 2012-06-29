@@ -13,22 +13,15 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Amee">
-                    <separator string="AMEE"/>
                     <newline/>
-                    <field name="field0" />
-                    <field name="field1" />
-                    <field name="field2" />
-                    <field name="field3" />
-                    <field name="field4" />
-                    <field name="field5" />
-                    <field name="field6" />
-                    <field name="field7" />
-                    <field name="field8" />
-                    <field name="field9" />
-                    <field name="field10" />
-                    <field name="field11" />
-                    <field name="field12" />
-                    <field name="field13" />
+                    <field name="gas_quant" />
+                    <field name="iron_quant" />
+                    <field name="material_quant" />
+                    <field name="pig_quant" />
+                    <field name="steel_quant" />
+                    <field name="result_co2e" />
+                    <field name="result_ch4" />
+                    <field name="result_co2" />
                     <group col="4" colspan="4">
                         <button icon="gtk-cancel" special="cancel" string="Cancel"/>
                         <button name="query_amee" string="Query EPI from Amee" colspan="1" type="object" icon="gtk-ok" />
@@ -45,6 +38,7 @@
     		<field name="res_model">amee.wizard</field>
  	   		<field name="view_type">form</field>
     		<field name="view_mode">form</field>
+    		<field name="target">new</field>
     		
 		</record>
 	    
@@ -65,7 +59,7 @@
 
         
  
-        
+        <!-- action item on the right side within product view -->
          <act_window name="Amee Request"
             res_model="amee.wizard"
             src_model="product.product"
