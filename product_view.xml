@@ -50,7 +50,7 @@
                 <xpath expr="/form/notebook/page[@string='Descriptions']" position="after">
                 		 <page string="LWC-EPI">
                 		     <separator string="AMEE"/>
-           					<button name="%(amee.action_amee_query)d" string="Test Wizard" type="action" />
+           					<button name="%(amee.action_amee_query)d" string="Query Amee" type="action" />
                 		 </page>
 				 </xpath>
                

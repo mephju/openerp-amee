@@ -3,6 +3,11 @@ import httplib
 import string
 import base64
 import urllib2
+import urllib
+import urlparse
+
+import ast
+import simplejson
 
 class wizard_amee(osv.osv_memory):
     _name = 'amee.wizard'
@@ -30,97 +35,90 @@ class wizard_amee(osv.osv_memory):
     
     
     def query_amee(self, cr, uid, ids, context=None):
-        amee_config = self._get_amee_config( cr, uid)
         
         data = self.read(cr, uid, ids, context=context)[0]
         
+        print data
+        print ""
+        
+        print 'product'
+        product_id = data['product_id'][0]
+        p    = self.pool.get('product.product')
+        p   = p.browse(cr, uid, product_id)
+        
+        print p['name']
+        material = p['name']
+        
+        
+        amee_config = self.get_amee_config(cr, uid)
+        
+        material = urllib.urlencode({'material':material})
+        print material
+        
         server      = 'api-stage.amee.com'
         endpoint    = "/3.6/categories/iron_and_steel/calculation"
-        query = ""
-        query += "?material=Steel&"
-        query += "values.gasQuantity=" + str(data['gas_quant']) + "&units.gasQuantity=kg&"
+        query = "?"
+        query += material
+        query += "&values.gasQuantity=" + str(data['gas_quant']) + "&units.gasQuantity=kg&"
         query += "values.ironQuantity=" + str(data['iron_quant']) + "&units.ironQuantity=kg&"
         query += "values.materialQuantity=" + str(data['material_quant']) + "&units.materialQuantity=kg&"
         query += "values.pigQuantity=" + str(data['pig_quant']) + "&units.pigQuantity=kg&"
         query += "values.steelQuantity=" + str(data['steel_quant']) + "&units.steelQuantity=kg"        
         
-        
+        url = "https://" + server + endpoint + query
         
         user    = "sam1"
         pwd     = "v57ty37f"
+        
+        user    = amee_config.api_key
+        pwd     = amee_config.password
         auth    = 'Basic ' + string.strip(base64.encodestring(user + ':' + pwd))
-        
-        conn = httplib.HTTPConnection(server)
-        header = {  
-                    "Accept" : "application/json",
-                    "Authorization" : auth
-                  }
-        
-        
-        conn.request("GET", endpoint+query, None, header)
-        response = conn.getresponse()
-        
-        
-        
-        
-#        authinfo = urllib2.HTTPPasswordMgrWithDefaultRealm()
-#        authinfo.add_password(None, server, 'testuser', 'test-user-pass')
-#        page = 'HTTP://'+SERVER+'/cgi-bin/tools/orders_waiting.py'
-#        handler = urllib2.HTTPBasicAuthHandler(authinfo)
-#        myopener = urllib2.build_opener(handler)
-#        opened = urllib2.install_opener(myopener)
-#        output = urllib2.urlopen(page)
-        
-        #response = urllib.urlopen('https://sam1:v57ty37f@api-stage.amee.com/3.6/categories/iron_and_steel/calculation' + query)
-        
-        print 'http call: '
-        print conn
-        print response.status, response.reason
-        
-        
-        print "we are querying amee now for " + str(data['product_id'])
-        print 'query: ' + endpoint + query
-        print "data%%%%%%%%%%%%%%%%%%%%%%%%%%%%%:" 
-        print data
-        return { 'result_co2e':334 }
-    
-    def get_amee_params(self, product):
-        return ["param1", "param2", "param3"]
 
-    
-    def _build_param_fields(self, context):
-        print "build param fields"
-        print context
-        view_code = {}
-        params = self.get_amee_params(context)
-        for i in range(14):
-            current     = "field" + str(i)
-            current2     = """<field name="%s" modifiers="{}"/>""" %(current)
+        
+        
+        
+        
+        
+        
+        headers = {"Accept":"application/json", "Authorization":auth}
+        request = urllib2.Request(url)
+ 
+        # post form data
+        # request.add_data(urllib.urlencode(data))
+ 
+        for key,value in headers.items():
+            request.add_header(key,value)
+ 
+        response = urllib2.urlopen(request)
+ 
+        print 'http call: '
+        print response.info().headers
+        
+        data = response.read()        
+        print ""
+        print data
+        print ""
+        
+        #convert here        
+        json = simplejson.loads(data)  
+        print json
+        print ""
+        
+        
+        data = json['output']
+        array = data['amounts']
+        print array
+        
+        for i in range(len(array)):
+            print array[i]
+            res = array[i]
+            type = "result_" + str.lower(res['type'])
+            value = res['value']
+            self.write(cr, uid, ids, {type:value}, context=None)
             
-            if i < len(params):
-                val         = params[i]                
-                view_code[current2] = """<field name="%s" string="%s" />"""  % (current, val) 
-                print val
-            else:
-                view_code[current2] = ""
-        return view_code
-                 
         
     
-#    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
-#        param_fields    = self._build_param_fields(context)
-#        print param_fields
-#        res             = super(wizard_amee, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar, submenu=submenu)
-#      
-#        print res['arch']
-#        for k in param_fields.keys():
-#            print k
-#            if k in res['arch']:
-#                print "replacing " + k
-#                res['arch'] = res['arch'].replace(k, param_fields[k])
-#        return res
-    
-    def _get_amee_config(self, cr, uid):
+    def get_amee_config(self, cr, uid):
         amee    = self.pool.get('amee.config')
         ids     = amee.search(cr, uid, [])
         for id in ids:
@@ -130,7 +128,7 @@ class wizard_amee(osv.osv_memory):
             print "AMEE API KEY" + amee_config.api_key
             print "AMEE URL" + amee_config.url
             print "PASSWORD " + amee_config.password
-            return amee_config.api_key
+            return amee_config
         else:
             print "COULDNT LOAD AMEE CONFIG"
             return None
