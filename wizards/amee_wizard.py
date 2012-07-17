@@ -16,14 +16,14 @@ class wizard_amee(osv.osv_memory):
     _name = 'amee.wizard'
     _columns = {
                  
-            "gas_quant": fields.integer('Gas'),
-            "iron_quant": fields.integer('Iron'),
-            "material_quant": fields.integer('Material'),
-            "pig_quant": fields.integer('Pig'),
-            "steel_quant": fields.integer('Steel'),
-            'result_co2e': fields.float('CO2e', readonly=True),
-            'result_ch4': fields.float('CH4', readonly=True),
-            'result_co2': fields.float('CO2', readonly=True),
+            "gas_quant": fields.integer('Gas in kg'),
+            "iron_quant": fields.integer('Iron in kg'),
+            "material_quant": fields.integer('Material in kg'),
+            "pig_quant": fields.integer('Pig in kg'),
+            "steel_quant": fields.integer('Steel in kg'),
+            'result_co2e': fields.float('CO2e in kg', readonly=True),
+            'result_ch4': fields.float('CH4 in kg', readonly=True),
+            'result_co2': fields.float('CO2 in kg', readonly=True),
             'product_id': fields.many2one('product.product', 'Product', required=True, readonly=1),
     }
     
