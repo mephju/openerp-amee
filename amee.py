@@ -1,9 +1,10 @@
-
 from osv import osv, fields
 
-
-
 class amee_config(osv.osv_memory):
+    """This class implements a configuration wizard which is started automatically after installation of the amee module.
+    It's responsible for storing Amee related configuration data.
+    This data is later used to make amee requests.
+    """
     _name       = 'amee.config'
     _inherit    = 'res.config'
     _columns    = { 
@@ -13,6 +14,7 @@ class amee_config(osv.osv_memory):
                    }
     
     def execute(self, cr, uid, ids, context=None):
+        """ """
         print 'config'
         print context
         

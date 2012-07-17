@@ -6,7 +6,7 @@
 	    
 	
 	    
-	    
+	    <!-- This is the wizard view to make a request to amee. -->
 	   <record id="view_amee_query" model="ir.ui.view">
             <field name="name">amee.wizard.form</field>
             <field name="model">amee.wizard</field>
@@ -31,7 +31,7 @@
             </field>
         </record>
         
-	
+		<!-- This is the action to open the query wizard above -->
 	    <record id="action_amee_query" model="ir.actions.act_window">
     		<field name="name">Query Amee</field>
     		<field name="type">ir.actions.act_window</field>
@@ -42,6 +42,8 @@
     		
 		</record>
 	    
+	    
+	    <!-- This is the product view extension which adds a tab to the product view -->
         <record id="product_normal_form_view" model="ir.ui.view">
             <field name="name">product.normal.form.inherit</field>
             <field name="model">product.product</field>

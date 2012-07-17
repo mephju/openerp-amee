@@ -10,6 +10,9 @@ import ast
 import simplejson
 
 class wizard_amee(osv.osv_memory):
+    """This class implements a wizard which is responsible for making http requests to Amee.
+    It accepts certain input values which are not persisted. That's why we decided to use a wizard instead of a normal controller class.
+    """
     _name = 'amee.wizard'
     _columns = {
                  
@@ -35,6 +38,14 @@ class wizard_amee(osv.osv_memory):
     
     
     def query_amee(self, cr, uid, ids, context=None):
+        """This method is performing the amee call. 
+        1. We fetch the wizard context data
+        2. We load the product name which later is passed to Amee as the material parameter 
+        3. We fetch the Amee configuration data for making the request. 
+        4. We build the http query which is just a simple url query.
+        5. The response is the displayed in the wixard by writing into the memory object via a database method.
+        @return: nothing. but after executing the wizard view displays the results from request in a meaningful way. 
+        """
         
         data = self.read(cr, uid, ids, context=context)[0]
         
@@ -75,16 +86,8 @@ class wizard_amee(osv.osv_memory):
         auth    = 'Basic ' + string.strip(base64.encodestring(user + ':' + pwd))
 
         
-        
-        
-        
-        
-        
         headers = {"Accept":"application/json", "Authorization":auth}
         request = urllib2.Request(url)
- 
-        # post form data
-        # request.add_data(urllib.urlencode(data))
  
         for key,value in headers.items():
             request.add_header(key,value)
@@ -119,6 +122,10 @@ class wizard_amee(osv.osv_memory):
         
     
     def get_amee_config(self, cr, uid):
+        """Retrieves the config data which was stored before through our memory wizard class amee_config. 
+        This data is retrieved for every Amee call.
+        @return: a dictionary containing all retrieved data
+        """
         amee    = self.pool.get('amee.config')
         ids     = amee.search(cr, uid, [])
         for id in ids:
@@ -156,6 +163,8 @@ class wizard_amee(osv.osv_memory):
     
     def onchange_product_id(self, cr, uid, ids, prod_id):
         """ On Change of Product ID getting the value of related UoM.
+        This code has actually been copied from another module. 
+        It's needed to be able to change the product from within the wizard view.
          @param self: The object pointer.
          @param cr: A database cursor
          @param uid: ID of the user currently logged in
